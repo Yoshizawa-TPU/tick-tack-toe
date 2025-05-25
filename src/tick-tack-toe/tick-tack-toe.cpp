@@ -268,9 +268,12 @@ public:
 
 bool AI_ordered::think(Board& b)
 {
-	for (int y = 0; y < Board::BOARD_SIZE; y++) {
-		for (int x = 0; x < Board::BOARD_SIZE; x++) {
-			if (b.mass_[y][x].put(Mass::ENEMY)) {
+	for (int y = 0; y < Board::BOARD_SIZE; y++) 
+	{
+		for (int x = 0; x < Board::BOARD_SIZE; x++) 
+		{
+			if (b.mass_[y][x].put(Mass::ENEMY)) 
+			{
 				return true;
 			}
 		}
@@ -290,15 +293,19 @@ int AI_MiniMax::evaluate(Board& b)
 int AI_MiniMax::minimax(Board& b, bool isMax)
 {
 	Board::WINNER result = b.calc_result();
-	if (result != Board::NOT_FINISED) {
+	if (result != Board::NOT_FINISED) 
+	{
 		return evaluate(b);
 	}
 
 	int bestScore = isMax ? -1000 : 1000;
 
-	for (int y = 0; y < Board::BOARD_SIZE; y++) {
-		for (int x = 0; x < Board::BOARD_SIZE; x++) {
-			if (b.mass_[y][x].getStatus() == Mass::BLANK) {
+	for (int y = 0; y < Board::BOARD_SIZE; y++) 
+	{
+		for (int x = 0; x < Board::BOARD_SIZE; x++) 
+		{
+			if (b.mass_[y][x].getStatus() == Mass::BLANK) 
+			{
 				b.mass_[y][x].setStatus(isMax ? Mass::ENEMY : Mass::PLAYER);
 				int score = minimax(b, !isMax);
 				b.mass_[y][x].setStatus(Mass::BLANK);
@@ -316,9 +323,12 @@ bool AI_MiniMax::think(Board& b)
 	int bestScore = -1000;
 	int bestX = -1, bestY = -1;
 
-	for (int y = 0; y < Board::BOARD_SIZE; y++) {
-		for (int x = 0; x < Board::BOARD_SIZE; x++) {
-			if (b.mass_[y][x].getStatus() == Mass::BLANK) {
+	for (int y = 0; y < Board::BOARD_SIZE; y++) 
+	{
+		for (int x = 0; x < Board::BOARD_SIZE; x++) 
+		{
+			if (b.mass_[y][x].getStatus() == Mass::BLANK) 
+			{
 				b.mass_[y][x].setStatus(Mass::ENEMY);
 				int score = minimax(b, false);
 				b.mass_[y][x].setStatus(Mass::BLANK);
@@ -332,7 +342,8 @@ bool AI_MiniMax::think(Board& b)
 		}
 	}
 
-	if (bestX != -1 && bestY != -1) {
+	if (bestX != -1 && bestY != -1) 
+	{
 		return b.mass_[bestY][bestX].put(Mass::ENEMY);
 	}
 

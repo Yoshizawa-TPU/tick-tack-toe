@@ -296,8 +296,8 @@ int AI_MiniMax::minimax(Board& b, bool isMax)
 
 	int bestScore = isMax ? -1000 : 1000;
 
-	for (int y = 0; y < 3; y++) {
-		for (int x = 0; x < 3; x++) {
+	for (int y = 0; y < Board::BOARD_SIZE; y++) {
+		for (int x = 0; x < Board::BOARD_SIZE; x++) {
 			if (b.mass_[y][x].getStatus() == Mass::BLANK) {
 				b.mass_[y][x].setStatus(isMax ? Mass::ENEMY : Mass::PLAYER);
 				int score = minimax(b, !isMax);
@@ -318,8 +318,8 @@ bool AI_MiniMax::think(Board& b)
 	int bestScore = -1000;
 	int bestX = -1, bestY = -1;
 
-	for (int y = 0; y < 3; y++) {
-		for (int x = 0; x < 3; x++) {
+	for (int y = 0; y < Board::BOARD_SIZE; y++) {
+		for (int x = 0; x < Board::BOARD_SIZE; x++) {
 			if (b.mass_[y][x].getStatus() == Mass::BLANK) {
 				b.mass_[y][x].setStatus(Mass::ENEMY);
 				int score = minimax(b, false);

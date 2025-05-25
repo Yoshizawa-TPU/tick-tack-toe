@@ -303,9 +303,7 @@ int AI_MiniMax::minimax(Board& b, bool isMax)
 				int score = minimax(b, !isMax);
 				b.mass_[y][x].setStatus(Mass::BLANK);
 
-				bestScore = isMax ?
-					std::max(bestScore, score) :
-					std::min(bestScore, score);
+				bestScore = isMax ? std::max(bestScore, score) : std::min(bestScore, score);
 			}
 		}
 	}
